@@ -6,7 +6,6 @@ const Header = () => {
     <header>
         <Logo />
         <Title text= "Task Manager 3" small="A great application"/>
-        <Title />
         </header>
   );
 };
