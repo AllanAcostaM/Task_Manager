@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 
 const Title = ({ text, small }) => {
   const subHeadingStyles = {
-    color: small.length > 3 ? "blue" : "yellow",
+    color: small.length > 3 ? "blue3" : "yellow",
     textoDecoration: "underline",
   };
 
