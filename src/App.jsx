@@ -1,8 +1,7 @@
 import { useState } from "react";
 import Header from "./components/Header";
-import Form from "./components/Form";
+import AddTaskForm from "./components/AddTaskForm";
 import TaskList from "./components/TaskList";
-import Button from "./components/Button";
 import "./styles/App.scss";
 
 function App() {
@@ -16,8 +15,7 @@ function App() {
   return (
     <div className="app">
       <Header />
-      <Form />
-      <Button />
+      <AddTaskForm />
       <TaskList tasks={tasks} />
     </div>
   );

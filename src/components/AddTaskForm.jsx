@@ -1,6 +1,6 @@
-import "../styles/Form.scss";
+import "../styles/AddTaskForm.scss";
 
-const Form = () => {
+const AddTaskForm = () => {
   return (
     <form className="form">
       <label className="form__label">New Task</label>
@@ -9,4 +9,4 @@ const Form = () => {
     </form>
   );
 };
-export default Form;
+export default AddTaskForm;
