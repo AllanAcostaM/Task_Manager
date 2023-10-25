@@ -2,8 +2,7 @@ import { useState } from "react";
 import Header from "./components/Header";
 import Form from "./components/Form";
 import TaskList from "./components/TaskList";
-
-import "./app.css";
+import "./styles/App.scss";
 
 function App() {
   const [tasks, setTasks] = useState([
