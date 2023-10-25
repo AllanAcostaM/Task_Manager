@@ -2,6 +2,7 @@ import { useState } from "react";
 import Header from "./components/Header";
 import Form from "./components/Form";
 import TaskList from "./components/TaskList";
+import Button from "./components/Button";
 import "./styles/App.scss";
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
     <div className="app">
       <Header />
       <Form />
+      <Button />
       <TaskList tasks={tasks} />
     </div>
   );
