@@ -7,7 +7,7 @@ const TaskList = ({ tasks, onDelete }) => {
   return (
     <>
       {tasks.length === 0 ? (
-        <h3>No Task</h3>
+        <h3 className="noTask">No Tasks</h3>
       ) : (
         <div className="tasks">
           {tasks.map((task) => (

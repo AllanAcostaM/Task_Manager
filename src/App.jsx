@@ -23,7 +23,7 @@ function App() {
 
   return (
     <div className="app">
-      <Header />
+      <Header count={tasks.length} />
       <AddTaskForm />
       <TaskList tasks={tasks} onDelete={onDeleteHandler} />
     </div>
