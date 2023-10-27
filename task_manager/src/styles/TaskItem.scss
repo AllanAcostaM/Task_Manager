@@ -1,0 +1,19 @@
+.task {
+  background-color: rgb(15, 139, 194);
+  padding: 10px 15px;
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  h3 {
+    color: rgb(11, 9, 10);
+    font-weight: bolder;
+  }
+  &:hover {
+    background-color: rgb(14, 130, 185);
+  }
+  .delete {
+    color: rgb(77, 75, 75);
+    cursor: pointer;
+  }
+}
