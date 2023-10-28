@@ -4,19 +4,11 @@ import "../styles/AddTaskForm.scss";
 
 const AddTaskForm = ({ onCreateTask }) => {
   const [text, setText] = useState("");
-  // Ejecutado cada vez que se actualiza el componente si no se pone el array []
-  useEffect(() => {
-    console.log("Re-rendered");
-  }, []);
+  const [amount, setAmount] = useState(0);
 
-  // Ejecutado SOLO al crear/montar el componente
+  // Detecta los cambios en la variable "text" y actualiza la variable "amount"
   useEffect(() => {
-    console.log("Componente creado");
-  }, []);
-
-  // Ejecuta al crear/montar el componente y cuando cambia el valor de la dependencia
-  useEffect(() => {
-    console.log("Cambio el texto");
+    setAmount(text.length);
   }, [text]);
 
   const handleSubmit = (event) => {
@@ -42,6 +34,7 @@ const AddTaskForm = ({ onCreateTask }) => {
         value={text}
         onChange={(event) => setText(event.target.value)}
       />
+      <small className="form__characters">Typed characters: {amount}</small>
       <button className="form__button">Add</button>
     </form>
   );
