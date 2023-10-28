@@ -56,7 +56,7 @@ function App() {
       };
       // Crea la tarea en el backend
       const comunication = await axios.post(
-        "http://localhost:3000/tasks/",
+        import.meta.env.VITE_BACKEND_URL,
         newTask
       );
       // Verificacion de exito de la operacion

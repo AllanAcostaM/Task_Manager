@@ -1,9 +1,23 @@
 import PropTypes from "prop-types";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "../styles/AddTaskForm.scss";
 
 const AddTaskForm = ({ onCreateTask }) => {
   const [text, setText] = useState("");
+  // Ejecutado cada vez que se actualiza el componente si no se pone el array []
+  useEffect(() => {
+    console.log("Re-rendered");
+  }, []);
+
+  // Ejecutado SOLO al crear/montar el componente
+  useEffect(() => {
+    console.log("Componente creado");
+  }, []);
+
+  // Ejecuta al crear/montar el componente y cuando cambia el valor de la dependencia
+  useEffect(() => {
+    console.log("Cambio el texto");
+  }, [text]);
 
   const handleSubmit = (event) => {
     // Previene que se envie informacion al servidor refrescando la pagina
