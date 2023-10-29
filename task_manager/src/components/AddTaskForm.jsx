@@ -1,11 +1,14 @@
 import PropTypes from "prop-types";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import LocalizationContext from "../context/LocalizationContext";
+
 import "../styles/AddTaskForm.scss";
 
 const AddTaskForm = ({ onCreateTask }) => {
   const [text, setText] = useState("");
   const [amount, setAmount] = useState(0);
-
+  // Obtiene el contexto
+  const local = useContext(LocalizationContext);
   // Detecta los cambios en la variable "text" y actualiza la variable "amount"
   useEffect(() => {
     setAmount(text.length);
@@ -16,7 +19,7 @@ const AddTaskForm = ({ onCreateTask }) => {
     event.preventDefault();
     // Valida que el usuario haya digitado un texto
     if (!text) {
-      alert("You must type the text of the task");
+      alert(local.textValidation);
       return;
     }
     // Envia la nueva tarea al componente padre
@@ -27,15 +30,17 @@ const AddTaskForm = ({ onCreateTask }) => {
 
   return (
     <form className="form" onSubmit={handleSubmit}>
-      <label className="form__label">New Task</label>
+      <label className="form__label">{local.newTask}:</label>
       <input
         type="text"
         className="form__input"
         value={text}
         onChange={(event) => setText(event.target.value)}
       />
-      <small className="form__characters">Typed characters: {amount}</small>
-      <button className="form__button">Add</button>
+      <small className="form__characters">
+        {local.typedCharacters}: {amount}
+      </small>
+      <button className="form__button">{local.add}</button>
     </form>
   );
 };
