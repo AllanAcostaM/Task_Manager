@@ -8,7 +8,7 @@ const Header = ({ count }) => {
   return (
     <header>
       <Logo />
-      <Title text="Task Manager" small={`Count: ${count}`} />
+      <Title count={count} />
     </header>
   );
 };

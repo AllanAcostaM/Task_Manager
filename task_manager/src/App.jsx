@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+
 import Header from "./components/Header";
 import AddTaskForm from "./components/AddTaskForm";
 import TaskList from "./components/TaskList";
+import LocalizationContext from "./context/LocalizationContext";
+
 import "./styles/App.scss";
 
 function App() {
@@ -72,12 +75,25 @@ function App() {
     }
   };
 
+  const local = {
+    es: {
+      Title: "Administrador de Tareas",
+      count: "Cantidad",
+    },
+    en: {
+      Title: "Task Manager",
+      count: "Count",
+    },
+  };
+
   return (
-    <div className="app">
-      <Header count={tasks.length} />
-      <AddTaskForm onCreateTask={onCreateHandler} />
-      <TaskList tasks={tasks} onDeleteTask={onDeleteHandler} />
-    </div>
+    <LocalizationContext.Provider value={local.es}>
+      <div className="app">
+        <Header count={tasks.length} />
+        <AddTaskForm onCreateTask={onCreateHandler} />
+        <TaskList tasks={tasks} onDeleteTask={onDeleteHandler} />
+      </div>
+    </LocalizationContext.Provider>
   );
 }
 
