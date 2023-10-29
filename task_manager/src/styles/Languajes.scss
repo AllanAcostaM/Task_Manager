@@ -1,0 +1,20 @@
+.languajes {
+  display: flex;
+  justify-content: end;
+  gap: 10px;
+  font-weight: bold;
+}
+
+span {
+  cursor: pointer;
+  font-size: 12px;
+  padding: 6px;
+  border-radius: 3px;
+  border: 2px solid rgb(68, 70, 194);
+  background-color: rgb(136, 132, 132);
+  margin-top: 10px;
+}
+
+span:hover {
+  background-color: rgb(90, 92, 230);
+}

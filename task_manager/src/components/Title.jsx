@@ -9,8 +9,8 @@ const Title = ({ count }) => {
   const local = useContext(LocalizationContext);
 
   return (
-    <div className="Title">
-      <h2>{local.Title}</h2>
+    <div className="title">
+      <h2>{local.title}</h2>
       <h4>
         {local.count}: {count}
       </h4>
