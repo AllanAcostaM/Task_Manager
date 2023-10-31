@@ -6,13 +6,13 @@ import "../styles/Title.scss";
 
 const Title = ({ count }) => {
   // Obtiene el contexto
-  const local = useContext(LocalizationContext);
+  const { languaje } = useContext(LocalizationContext);
 
   return (
     <div className="title">
-      <h2>{local.title}</h2>
+      <h2>{languaje.title}</h2>
       <h4>
-        {local.count}: {count}
+        {languaje.count}: {count}
       </h4>
     </div>
   );

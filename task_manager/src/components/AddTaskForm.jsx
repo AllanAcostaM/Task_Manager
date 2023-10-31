@@ -8,7 +8,7 @@ const AddTaskForm = ({ onCreateTask }) => {
   const [text, setText] = useState("");
   const [amount, setAmount] = useState(0);
   // Obtiene el contexto
-  const local = useContext(LocalizationContext);
+  const { languaje } = useContext(LocalizationContext);
   // Detecta los cambios en la variable "text" y actualiza la variable "amount"
   useEffect(() => {
     setAmount(text.length);
@@ -19,7 +19,7 @@ const AddTaskForm = ({ onCreateTask }) => {
     event.preventDefault();
     // Valida que el usuario haya digitado un texto
     if (!text) {
-      alert(local.textValidation);
+      alert(languaje);
       return;
     }
     // Envia la nueva tarea al componente padre
@@ -30,7 +30,7 @@ const AddTaskForm = ({ onCreateTask }) => {
 
   return (
     <form className="form" onSubmit={handleSubmit}>
-      <label className="form__label">{local.newTask}:</label>
+      <label className="form__label">{languaje.newTask}:</label>
       <input
         type="text"
         className="form__input"
@@ -38,9 +38,9 @@ const AddTaskForm = ({ onCreateTask }) => {
         onChange={(event) => setText(event.target.value)}
       />
       <small className="form__characters">
-        {local.typedCharacters}: {amount}
+        {languaje.typedCharacters}: {amount}
       </small>
-      <button className="form__button">{local.add}</button>
+      <button className="form__button">{languaje.add}</button>
     </form>
   );
 };

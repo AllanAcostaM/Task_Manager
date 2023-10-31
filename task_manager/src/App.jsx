@@ -79,16 +79,11 @@ function App() {
     }
   };
 
-  const handlerLanguajeChange = (lang) => {
-    // Cambia el estado dependiendo del idioma seleccionado
-    setLanguaje(local[lang]);
-  };
-
   return (
-    <LocalizationContext.Provider value={languaje}>
+    <LocalizationContext.Provider value={{ languaje, setLanguaje }}>
       <div className="app">
         <Header count={tasks.length} />
-        <SelectLanguaje onChangeLanguaje={handlerLanguajeChange} />
+        <SelectLanguaje />
         <AddTaskForm onCreateTask={onCreateHandler} />
         <TaskList tasks={tasks} onDeleteTask={onDeleteHandler} />
       </div>
