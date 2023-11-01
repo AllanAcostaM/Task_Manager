@@ -1,81 +1,64 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
+import { useState, useEffect, useReducer } from "react";
 
+// Componentes
 import Header from "./components/Header";
 import AddTaskForm from "./components/AddTaskForm";
 import TaskList from "./components/TaskList";
 import SelectLanguaje from "./components/SelectLanguaje";
 
+// Contexto
 import LocalizationContext from "./context/LocalizationContext";
 import local from "./context/LocalizationData";
 
+// Reducers
+import taskReducer from "./reducers/taskReducer";
+import { GET, ADD, DELETE } from "./reducers/actions";
+
+// API
+import getTasks from "./api/getTasks";
+import createTask from "./api/createTask";
+import deleteTask from "./api/deleteTask";
+
+// Estilos
 import "./styles/App.scss";
 
 function App() {
-  const [tasks, setTasks] = useState([]);
+  const [tasks, dispatch] = useReducer(taskReducer, []);
   const [languaje, setLanguaje] = useState(local.es);
   // useEffect se ejecuta una sola vez cuando se monta el componente
   useEffect(() => {
-    const getTasks = async () => {
-      try {
-        // Hace la peticion al backend
-        const comunication = await axios.get(import.meta.env.VITE_BACKEND_URL);
-
-        // Verifica el exito de la peticion
-        if (comunication.status === 200) {
-          // Modifica el estado
-          setTasks(comunication.data);
-        }
-      } catch (error) {
-        console.error("No hubo conexion al backend");
+    const loadTasks = async () => {
+      // Obtiene las tareas del backend
+      const tasks = await getTasks();
+      // Modifica el estado
+      if (tasks) {
+        dispatch({ type: GET, tasks });
+      } else {
+        dispatch({ type: GET, tasks: [] });
       }
     };
-    // Invoca la funcion para comunicarse con el backend
-    getTasks();
+
+    loadTasks();
   }, []);
 
   const onDeleteHandler = async (id) => {
-    if (confirm("Are you sure ypu want to delete the task?")) {
-      try {
+    if (confirm(languaje.confirmDeletion)) {
+      if (await deleteTask(id)) {
         // Elimina la tarea del backend
-        const comunication = await axios.delete(
-          `${import.meta.env.VITE_BACKEND_URL}${id}`
-        );
-        if (comunication.status === 200) {
-          // Elimina el elemento filtrando el arreglo por el id de cada tarea
-          const result = tasks.filter((task) => task.id !== id);
-          // Modifica el estado
-          setTasks(result);
-        }
-      } catch (error) {
-        alert("Error eliminado la tarea\nIntente mas tarde!!");
-        console.log(error);
+        // Modifica el estado
+        dispatch({ type: DELETE, id });
       }
     }
   };
 
   const onCreateHandler = async (text) => {
-    try {
-      // Crean un objeto para la nueva tarea
-      const newTask = {
-        id: crypto.randomUUID(),
-        text,
-      };
-      // Crea la tarea en el backend
-      const comunication = await axios.post(
-        import.meta.env.VITE_BACKEND_URL,
-        newTask
-      );
-      // Verificacion de exito de la operacion
-      if (comunication.status === 201) {
-        // Crea un nuevo arreglo basado en los elementos del arreglo tasks agregando la nueva tarea al final
-        const newTasks = [...tasks, comunication.data];
-        // Modifica el estado
-        setTasks(newTasks);
-      }
-    } catch (error) {
-      alert("Error de comunicacion creando la tarea\nIntente mas tarde!");
-      console.log("Hubo un error de comunicacion creando la tarea");
+    // Crea la tarea en el backend
+    const newTask = await createTask(text);
+    // Modifica el estado
+    if (newTask) {
+      dispatch({ type: ADD, newTask });
+    } else {
+      alert("Hubo un error\nIntente mas tarde");
     }
   };
 
